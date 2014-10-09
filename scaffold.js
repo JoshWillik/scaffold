@@ -37,7 +37,7 @@ function copy( src, dest, callback ){
 }
 
 function save( src, name ){
-  if( !( name && filepath ) ){
+  if( !( name && src ) ){
     die( help( 'create' ) )
   }
   copy( normalize( src ), path.join( scripts, name ), function(){
