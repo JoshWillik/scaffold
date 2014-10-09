@@ -36,11 +36,11 @@ function copy( src, dest, callback ){
   read.pipe( write )
 }
 
-function create( name, filepath ){
+function save( src, name ){
   if( !( name && filepath ) ){
     die( help( 'create' ) )
   }
-  copy( normalize( filepath ), path.join( scripts, name ), function(){
+  copy( normalize( src ), path.join( scripts, name ), function(){
     console.log( 'Template ' + name + ' saved' )
   })
 }
@@ -48,8 +48,8 @@ function create( name, filepath ){
 function help( command ){
   var commands = {
     help: 'Shows this help',
-    build: '$ scaffold build <template-name> <target-file>',
-    create: '$ scaffold create <template-name> <source-file>'
+    build: '$ scaffold build <template-name> <build-file>',
+    save: '$ scaffold save <source-file> <template-name>'
   }
 
   if( command ){
@@ -72,7 +72,7 @@ function build( name, dest ){
 }
 
 module.exports = {
-  create: create,
+  save: save,
   help: help,
   build: build
 }
