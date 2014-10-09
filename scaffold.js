@@ -24,6 +24,8 @@ function copy( src, dest, callback ){
   src = path.resolve( src )
   dest = path.resolve( dest )
 
+  if( fs.existsSync( dest ) ) die( dest + ' already exists' )
+
   var read = fs.createReadStream( src )
   var write = fs.createWriteStream( dest )
 
@@ -61,7 +63,12 @@ function help( command ){
 }
 
 function build( name, dest ){
-
+  if( !( name && dest ) ){
+    die( help( 'create' ) )
+  }
+  copy( path.join( scripts, name ), normalize( dest ), function(){
+    console.log( 'Built template ' + name + ' to ' + dest )
+  })
 }
 
 module.exports = {
